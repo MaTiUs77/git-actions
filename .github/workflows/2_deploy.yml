@@ -13,14 +13,13 @@ jobs:
       env:
         ENV: ${{ secrets.ENV }}
         TARGET: ${{ secrets.TARGET }}
-        SHA: ${{ GITHUB_SHA }}
       with:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SERVER_SSH_KEY }}
         port: ${{ secrets.REMOTE_PORT }}
         script_stop: true
-        envs: TARGET,ENV,SHA
+        envs: TARGET,ENV
         script: |
           cd $TARGET/git-actions
           git checkout master
@@ -28,6 +27,5 @@ jobs:
           git checkout -- .
           git pull origin master
           echo $ENV > .env
-          echo "\nSHA=$SHA" >> .env
           npm install
           pm2 reload ecosystem.config.js
