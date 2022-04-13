@@ -1,5 +1,5 @@
 ## Jobs
-Autodeploy to servers
+Autodeploy to Digitalocean
 
 Test:
 - Install Nodejs
