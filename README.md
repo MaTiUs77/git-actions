@@ -1,9 +1,15 @@
 # Git Actions with Rsync
 
+## Jobs
+Test:
 - Install Nodejs v10.19.0
 - Run npm install
-- Run npm run ci (custom command)
-- Make .env
-- Rsync all files to server
+- Run npm build --if-present
+- Run npm test
+
+Deploy:
+- Make .env with secrets
 - Connect with ssh to server
-- Run npm start
+- Run git pull
+- Run npm install
+- Run pm2 ecosystem
