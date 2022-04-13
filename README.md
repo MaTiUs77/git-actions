@@ -1,6 +1,6 @@
-# Git Actions with Rsync
-
 ## Jobs
+Autodeploy to servers
+
 Test:
 - Install Nodejs v10.19.0
 - Run npm install
