@@ -2,7 +2,7 @@
 Autodeploy to servers
 
 Test:
-- Install Nodejs v10.19.0
+- Install Nodejs
 - Run npm install
 - Run npm build --if-present
 - Run npm test
