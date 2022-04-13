@@ -22,12 +22,10 @@ jobs:
         envs: TARGET,ENV
         script: |
           cd $TARGET/git-actions
-          pwd
           echo $ENV > .env
           git checkout master
           git clean -df
           git checkout -- .
           git pull origin master
-          git status
           npm install
           pm2 reload ecosystem.config.js
