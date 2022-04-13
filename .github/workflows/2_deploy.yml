@@ -19,6 +19,7 @@ jobs:
         key: ${{ secrets.SERVER_SSH_KEY }}
         port: ${{ secrets.REMOTE_PORT }}
         script_stop: true
+        envs: TARGET,ENV
         script: |
           echo "Target: $TARGET"
           cd $TARGET/git-actions
