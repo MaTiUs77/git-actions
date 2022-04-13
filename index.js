@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 
 app.get('/', (req, res) => {
-  res.send('Github Actions done!')
+  res.send(`Github Actions`)
 })
 
 app.listen(process.env.PORT, () => {
