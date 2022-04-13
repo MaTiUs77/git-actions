@@ -9,10 +9,10 @@ jobs:
 
     steps:
     - name: Set deploy vars
-        id: deploy_vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      id: deploy_vars
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
     - name: Check SHA short
-        run: echo ${{ steps.deploy_vars.outputs.sha_short }}
+      run: echo ${{ steps.deploy_vars.outputs.sha_short }}
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
       env:
