@@ -8,17 +8,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set deploy vars
-      id: deploy_vars
-      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-    - name: Check SHA short
-      run: echo ${{ steps.deploy_vars.outputs.sha_short }}
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
       env:
         ENV: ${{ secrets.ENV }}
         TARGET: ${{ secrets.TARGET }}
-        SHA: ${{ steps.deploy_vars.outputs.sha_short }}
+        SHA: ${{ GITHUB_SHA }}
       with:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
@@ -33,6 +28,6 @@ jobs:
           git checkout -- .
           git pull origin master
           echo $ENV > .env
-          echo $SHA > sha.txt
+          echo "\nSHA=$SHA" >> .env
           npm install
           pm2 reload ecosystem.config.js
