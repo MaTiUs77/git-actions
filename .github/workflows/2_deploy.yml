@@ -21,9 +21,12 @@ jobs:
         script_stop: true
         envs: TARGET,ENV
         script: |
-          echo "Target: $TARGET"
           cd $TARGET/git-actions
+          pwd
           echo $ENV > .env
+          git checkout master
+          git clean -df
+          git checkout -- .
           git pull origin master
           git status
           npm install
