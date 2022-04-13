@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js > logs/start_log.txt",
-    "ci": "echo \"Called from GithubActions\" > logs/ci.txt "
+    "start": "node index.js",
+    "test": "echo \"Right... im doing some tests...\" > logs/test.txt "
   },
   "repository": {
     "type": "git",

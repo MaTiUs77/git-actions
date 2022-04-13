@@ -6,17 +6,18 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Haciendo deploy
+    name: Install and Rsync
     steps:
       - uses: actions/checkout@v3
-      - name: Instalando node 10.19.0
+      - name: Instalando node v12.14.0
         uses: actions/setup-node@v3
         with:
-          node-version: 10.19.0
+          node-version: 12.14.0
       - run: npm install
-      - run: npm run ci
+      - run: npm run test
       - run: rm -rf .git
       - run: rm -rf .github
+      - run: rm -rf .gitignore
       - run: 'echo "$SSH_KEY" > key'
         shell: bash
         env:
@@ -28,5 +29,5 @@ jobs:
       - run: sudo chmod 700 ./key
       - name: Rsync to Server
         run: rsync -rav -e "ssh -i ./key -p ${{ secrets.REMOTE_PORT }} -oStrictHostKeyChecking=no" --progress --exclude={"node_modules","key"} . ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.TARGET }}
-      - name: 'Run migrations'
-        run: ssh -i ./key -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "cd ${{ secrets.TARGET }}; npm start"
+      - name: 'Run pm2'
+        run: ssh -i ./key -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "cd ${{ secrets.TARGET }}; pm2 reload ecosystem.config.js"
