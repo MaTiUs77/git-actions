@@ -20,6 +20,7 @@ jobs:
         port: ${{ secrets.REMOTE_PORT }}
         script_stop: true
         script: |
+          echo "Target: $TARGET"
           cd $TARGET/git-actions
           echo $ENV > .env
           git pull origin master
